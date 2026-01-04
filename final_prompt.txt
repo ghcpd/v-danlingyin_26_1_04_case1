@@ -1,0 +1,91 @@
+
+Prompt
+You are a senior technical writer and software engineer.
+Your task is to review the provided project files and identify missing documentation that is required for developers to correctly understand, set up, use, or contribute to the project.
+This evaluation focuses on the model’s ability to:
+- Detect missing or insufficient documentation
+- Understand developer expectations
+- Infer required documentation strictly from existing code and files
+- Produce accurate, minimal, and technically correct documentation
+--------------------------------------------------------------------------------
+Your Responsibilities:
+1.Identify Missing Documentation
+- Scan all provided files (source code, configs, README.md if present)
+- Identify documentation that SHOULD exist but is missing or incomplete, including but not limited to:
+- Setup / installation steps
+- Environment requirements
+- How to run or test the project
+- Explanation of key modules or architecture
+- Usage instructions for public APIs or utilities
+- Contribution or extension guidance (if applicable)
+For each missing documentation item, provide:
+- Missing doc type (e.g. Setup Guide, Usage Guide, Architecture Overview)
+- What information is missing
+- Why it is required for developers
+- Evidence from code that proves this documentation is needed
+--------------------------------------------------------------------------------
+2.Classify Severity For each missing documentation issue, classify severity:
+- High:
+- Prevents the project from being set up, run, or used correctly
+- Medium:
+- Causes confusion or misuse but does not fully block usage
+- Low:
+- Helpful but non-blocking (e.g. missing comments or explanations)
+--------------------------------------------------------------------------------
+3.Produce Missing Documentation Generate the following files:
+- README_backup.md
+- If README.md exists → unchanged copy
+- If README.md does NOT exist → explain explicitly that no backup was created
+- README.md
+- A complete, newly written documentation file that fills ALL identified gaps
+- Must be strictly based on existing code
+- Must NOT invent features or behavior not present in code
+Rules:
+- Do NOT change any code
+- Only add documentation
+- Keep documentation concise, clear, and developer-focused
+--------------------------------------------------------------------------------
+4.Generate Documentation Audit Report (report.json)
+Use the following structure:
+{
+  "summary": {
+    "total_missing_items": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "details": [
+    {
+      "id": 1,
+      "missing_doc_type": "Setup Guide",
+      "severity": "High",
+      "description": "",
+      "why_required": "",
+      "code_evidence": ""
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+5.Generate Validation Evidence Produce a file named doc_validation.md containing:
+- A checklist mapping:
+- Identified missing documentation
+- Newly added documentation sections
+- Explanation of how a new developer can now:
+- Set up the project
+- Understand the structure
+- Use the exposed functionality
+--------------------------------------------------------------------------------
+6.Generate Reviewer README Produce AUDIT_README.md explaining:
+- What was reviewed
+- What documentation was missing
+- What files were generated
+- How to verify that documentation is now sufficient
+--------------------------------------------------------------------------------
+📌 Rules for the Model
+- MUST NOT hallucinate features or behavior
+- MUST NOT invent files that do not exist
+- MUST base conclusions strictly on provided files
+- MUST clearly justify why documentation is missing
+- MUST keep code unchanged
+- MUST keep output structured, minimal, and readable
