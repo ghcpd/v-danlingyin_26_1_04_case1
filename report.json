@@ -1,0 +1,50 @@
+{
+  "summary": {
+    "total_missing_items": 5,
+    "high": 1,
+    "medium": 3,
+    "low": 1
+  },
+  "details": [
+    {
+      "id": 1,
+      "missing_doc_type": "Setup Guide",
+      "severity": "Medium",
+      "description": "Document required environment (Node.js) and basic setup (npm install).",
+      "why_required": "Developers need to know to use Node.js/npm before running the CLI.",
+      "code_evidence": "package.json (script uses node); src/input.js lines 1-3 (CommonJS require, process.argv)"
+    },
+    {
+      "id": 2,
+      "missing_doc_type": "Usage Guide / Entry Point",
+      "severity": "High",
+      "description": "Explain how to run tasks via `node src/input.js <taskName>` and note that `npm start` points to a missing `src/index.js`.",
+      "why_required": "Without this, `npm start` fails and developers cannot run any task.",
+      "code_evidence": "package.json (start: node src/index.js); src/input.js lines 1-9 (CLI parses taskName and runs task)"
+    },
+    {
+      "id": 3,
+      "missing_doc_type": "Task Reference",
+      "severity": "Medium",
+      "description": "List available tasks (`build`, `test`) and what they do.",
+      "why_required": "Developers need to know which task names are valid and their effects.",
+      "code_evidence": "src/tasks.js lines 1-7 (exports build/test functions that log actions)"
+    },
+    {
+      "id": 4,
+      "missing_doc_type": "Error Handling",
+      "severity": "Medium",
+      "description": "Document expected errors for missing or unknown tasks.",
+      "why_required": "Clarifies failure modes so callers can handle or avoid them.",
+      "code_evidence": "src/input.js lines 5-7 (throws when task name missing); src/taskRunner.js lines 6-8 (throws on unknown task)"
+    },
+    {
+      "id": 5,
+      "missing_doc_type": "Architecture / Extension Guidance",
+      "severity": "Low",
+      "description": "Describe module roles (CLI → runner → tasks) and how to add new tasks.",
+      "why_required": "Helps maintainers extend the task set correctly.",
+      "code_evidence": "src/input.js (delegates to runTask); src/taskRunner.js (resolves task by name); src/tasks.js (task registry)"
+    }
+  ]
+}
